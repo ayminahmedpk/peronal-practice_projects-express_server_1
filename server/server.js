@@ -11,7 +11,8 @@ connectDB();
 
 const app = express();
 
-
+app.use(express.json());
+app.use(express.urlencoded({ extended: false }));
 
 app.use('/users', require('./routes/userRoutes'));
 

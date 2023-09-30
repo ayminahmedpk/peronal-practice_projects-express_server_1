@@ -1,5 +1,8 @@
 
 
+0.0.3
+  - login and register implemented (no getMe or jwt)
+
 0.0.2
   - async handler middleware
   - installed bcrypt, jsonwebtoken
