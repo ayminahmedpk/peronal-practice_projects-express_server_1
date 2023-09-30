@@ -1,0 +1,4 @@
+
+
+To develop a simple MERN server with authentication and a basic crud feature
+(user specific).
