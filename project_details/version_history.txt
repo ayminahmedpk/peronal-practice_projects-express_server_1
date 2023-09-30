@@ -1,4 +1,10 @@
 
 
+0.0.2
+  - async handler middleware
+  - installed bcrypt, jsonwebtoken
+  - user controller initial setup
+  - user routes initial setup
+
 0.0.1
   - init
