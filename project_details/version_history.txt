@@ -1,5 +1,11 @@
 
 
+0.0.4
+  - jwt implemented completely (tokens aren't written to db - generated+sent /
+    verified realtime, based on secret)
+  - improved routing code (semantic imports)
+
+
 0.0.3
   - login and register implemented (no getMe or jwt)
 

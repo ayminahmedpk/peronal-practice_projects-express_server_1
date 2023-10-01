@@ -35,6 +35,7 @@ const register = asyncHandler(async (req, res) => {
       _id: user.id,
       name: user.name,
       email: user.email,
+      token: generateToken(user.id),
     });
   } else {
     res.status(400);
@@ -47,7 +48,6 @@ const register = asyncHandler(async (req, res) => {
 const login = asyncHandler(async (req, res) => {
   console.log('userController@login');
   const {email, password} = req.body;
-  console.log(req.body);
   
   if (!email || !password) {
     res.status(400);
@@ -62,7 +62,8 @@ const login = asyncHandler(async (req, res) => {
       _id: user.id,
       name: user.name,
       email: user.email,
-    });    
+      token: generateToken(user.id),
+    });
   } else {
     res.status(400);
     throw new Error('Incorrect credentials');
@@ -73,6 +74,17 @@ const login = asyncHandler(async (req, res) => {
 const getMe = asyncHandler(async (req, res) => {
   res.status(200).json({message: "userController@getMe"});
 })
+
+
+const generateToken = (id) => {
+  const token = jwt.sign(
+    {id},
+    process.env.JWT_SECRET,
+    {expiresIn: '30d'},
+  )
+  return token;
+}
+
 
 const userController = {register, login, getMe};
 
