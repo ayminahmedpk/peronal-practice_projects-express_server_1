@@ -1,5 +1,9 @@
 
 
+0.0.5
+  - basic goals crud
+
+
 0.0.4
   - jwt implemented completely (tokens aren't written to db - generated+sent /
     verified realtime, based on secret)
