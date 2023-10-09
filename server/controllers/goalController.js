@@ -12,14 +12,15 @@ const createGoal = asyncHandler(async(req, res) => {
   }
 
   const goal = await Goal.create({
-    text: req.body.text
-  })
+    text: req.body.text,
+    user: req.user.id,
+  });
 
   res.status(200).json({goal: goal})
 });
 
 const listGoals = asyncHandler(async(req, res) => {
-  const goals = await Goal.find();
+  const goals = await Goal.find({user: req.user.id});
   res.status(200).json(goals);
 });
 
@@ -29,6 +30,11 @@ const updateGoal = asyncHandler(async(req, res) => {
   if (!goal) {
     res.status(400);
     throw new Error("Goal not found. Please verify the provided id.");
+  }
+
+  if (goal.user.toString() !== req.user.id) {
+    res.status(400);
+    throw new Error("User not authorized to edit this post.");
   }
 
   const updatedGoal = await Goal.findByIdAndUpdate(
@@ -47,6 +53,11 @@ const deleteGoal = asyncHandler(async(req, res) => {
   if (!goal) {
     res.status(400);
     throw new Error("Goal not found. Please verify the provided id.");
+  }
+
+  if (goal.user.toString() !== req.user.id) {
+    res.status(400);
+    throw new Error("User not authorized to delete this post.");
   }
 
   await goal.deleteOne();

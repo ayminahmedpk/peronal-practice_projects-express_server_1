@@ -13,7 +13,7 @@ router.get('/', protect, (req, res) => {res.status(200).json({message: 'home pag
 
 
 router.use('/users', userRoutes);
-router.use('/goals', goalRoutes);
+router.use('/goals', protect, goalRoutes);
 
 module.exports = router;
 
